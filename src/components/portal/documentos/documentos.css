@@ -1,0 +1,80 @@
+.portal-docs { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
+.portal-docs-projeto { min-width: 0; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); scroll-margin-top: 6rem; }
+.portal-docs-projeto:target { border-color: var(--nova-acento); }
+.portal-docs-resumo { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; padding: clamp(1rem, 3vw, 1.5rem); border-radius: 1rem; cursor: pointer; list-style: none; }
+.portal-docs-resumo::-webkit-details-marker { display: none; }
+.portal-docs-resumo::marker { content: ""; }
+.portal-docs-resumo:focus-visible, .portal-doc-baixar:focus-visible, .portal-docs-paginas a:focus-visible { outline: 2px solid var(--nova-acento); outline-offset: 3px; }
+.portal-docs-cabecalho { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; min-width: 0; }
+.portal-docs-nome { font-size: 1.125rem; font-weight: 500; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+.portal-docs-contagem { padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--muted); color: var(--nova-acento); font-size: 0.8125rem; }
+.portal-docs-visibilidade { flex-basis: 100%; color: var(--muted-foreground); font-size: 0.8125rem; }
+.portal-docs-nota { color: var(--muted-foreground); font-size: 0.875rem; }
+.portal-docs-depende { flex-basis: 100%; color: var(--muted-foreground); font-size: 0.8125rem; }
+.portal-docs-dependente { margin-left: calc(var(--portal-recuo, 1) * 1rem); border-left: 3px solid var(--nova-acento); }
+.portal-docs-dependente[data-nivel="2"] { --portal-recuo: 2; }
+.portal-docs-dependente[data-nivel="3"] { --portal-recuo: 3; }
+@media (max-width: 40rem) { .portal-docs-dependente { margin-left: calc(var(--portal-recuo, 1) * 0.5rem); } }
+.portal-docs-chevron { flex-shrink: 0; color: var(--nova-acento); }
+.portal-docs-projeto[open] > .portal-docs-resumo .portal-docs-chevron { transform: rotate(180deg); }
+.portal-docs-conteudo { display: flex; flex-direction: column; gap: 1.5rem; padding: 0 clamp(1rem, 3vw, 1.5rem) 1.5rem; }
+.portal-docs-grupo h2 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+.portal-docs-grupo h3, .portal-docs-grupo h4 { margin-top: 0.25rem; color: var(--muted-foreground); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; overflow-wrap: anywhere; }
+.portal-docs-lista { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.portal-doc { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+.portal-doc-icone { flex-shrink: 0; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: var(--muted); color: var(--primary); }
+.portal-doc-texto { flex: 1; min-width: 0; }
+.portal-doc-titulo { font-weight: 500; overflow-wrap: anywhere; }
+.portal-doc-meta { margin-top: 0.25rem; color: var(--muted-foreground); font-size: 0.8125rem; }
+.portal-doc-baixar { flex-shrink: 0; }
+.portal-docs-paginas { display: flex; justify-content: space-between; gap: 1rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .portal-docs-projeto[open] > .portal-docs-conteudo { animation: portal-docs-abrir 220ms var(--nova-ease, ease-out); }
+  .portal-docs-chevron { transition: transform 220ms var(--nova-ease, ease-out); }
+  .portal-doc { transition: transform 300ms var(--nova-ease, ease-out); }
+  .portal-doc:hover { transform: translateY(-2px); border-color: var(--nova-acento); }
+}
+@keyframes portal-docs-abrir { from { opacity: 0; transform: translateY(-0.25rem); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 36rem) {
+  .portal-doc { flex-wrap: wrap; }
+  .portal-doc-baixar { width: 100%; }
+}
+.portal-equip-rolagem { margin-top: 1rem; min-width: 0; overflow-x: auto; }
+.portal-equip { width: 100%; border-collapse: collapse; }
+.portal-equip th, .portal-equip td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; overflow-wrap: anywhere; }
+.portal-equip thead th { color: var(--muted-foreground); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.portal-equip tbody th { font-weight: 500; }
+.portal-equip-acoes { display: flex; flex-direction: column; gap: 0.5rem; }
+.portal-equip-acoes li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.portal-equip-nome { font-size: 0.8125rem; color: var(--muted-foreground); overflow-wrap: anywhere; }
+.portal-equip-aguardando { color: var(--muted-foreground); font-size: 0.875rem; }
+@media (max-width: 40rem) {
+  .portal-equip thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .portal-equip, .portal-equip tbody, .portal-equip tr, .portal-equip th, .portal-equip td { display: block; }
+  .portal-equip tr { margin-bottom: 0.75rem; padding: 0.5rem 0; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+  .portal-equip th, .portal-equip td { border-bottom: 0; padding: 0.5rem 1rem; }
+  .portal-equip tbody th { font-size: 1.0625rem; }
+  .portal-equip td[data-rotulo]::before { content: attr(data-rotulo); display: block; margin-bottom: 0.25rem; color: var(--muted-foreground); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+}
+/* Aba Documentos do cliente: busca, blocos (Projetos / Documentos da contratação), etapa no cartão e "Ver mais". */
+.portal-docs-barra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1rem; }
+.portal-docs-busca { position: relative; flex: 1 1 18rem; max-width: 28rem; min-width: 0; color: var(--muted-foreground); }
+.portal-docs-busca svg { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.portal-docs-busca input { width: 100%; min-height: 2.75rem; padding: 0 1rem 0 2.5rem; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--foreground); font-size: 0.9375rem; }
+.portal-docs-busca input::placeholder { color: var(--muted-foreground); }
+.portal-docs-busca input:focus-visible { outline: 2px solid var(--nova-acento); outline-offset: 2px; }
+.portal-docs-bloco { display: flex; flex-direction: column; gap: 0.875rem; min-width: 0; }
+.portal-docs-bloco + .portal-docs-bloco { margin-top: 1rem; }
+.portal-docs-titulo-bloco { color: var(--muted-foreground); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.portal-docs-selos { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.portal-docs-grupo-total { color: var(--muted-foreground); font-weight: 500; letter-spacing: 0; }
+.portal-docs-mais { margin-top: 0.75rem; color: var(--nova-acento); }
+.portal-docs-sem-resultado { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; text-align: center; color: var(--muted-foreground); }
+.portal-docs-sem-resultado h2 { color: var(--foreground); margin: 0; }
+/* Celular, só na aba do cliente: linha compacta, sem o ícone do arquivo e com o botão Baixar só com o ícone. */
+@media (max-width: 36rem) {
+  .portal-docs-compacta .portal-doc { flex-wrap: nowrap; gap: 0.75rem; padding: 0.75rem 0.75rem 0.75rem 1rem; }
+  .portal-docs-compacta .portal-doc-icone { display: none; }
+  .portal-docs-compacta .portal-doc-baixar { width: auto; min-width: 2.75rem; padding: 0.5rem; }
+  .portal-docs-compacta .portal-doc-baixar-texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}

@@ -1,0 +1,235 @@
+/* Escopo da nova home: tudo pendurado em .nova para não vazar para outras rotas. */
+.nova {
+  --nova-fundo: #f5f7f8;
+  --nova-tinta: #1c2832;
+  --nova-acento: #2b7090;
+  --nova-acento-claro: #8cc4dc;
+  --nova-whatsapp: #1b8a4b;
+  --nova-ease: cubic-bezier(0.33, 1, 0.68, 1);
+  --nova-ease-longa: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Os utilitários transition-* do Tailwind v4 leem estas variáveis: toda transição da página nasce ease-out cubic. */
+  --default-transition-timing-function: var(--nova-ease);
+  --default-transition-duration: 500ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.nova) {
+    scroll-behavior: smooth;
+  }
+}
+
+.nova-revelar {
+  opacity: 0;
+  translate: 0 2rem;
+  transition:
+    opacity 0.9s var(--nova-ease-longa) var(--atraso, 0ms),
+    translate 1.1s var(--nova-ease-longa) var(--atraso, 0ms);
+}
+.nova-revelar[data-visivel] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.nova-mascara {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.nova-palavra {
+  display: inline-block;
+}
+.nova-titulo .nova-palavra {
+  translate: 0 110%;
+  transition: translate 1.1s var(--nova-ease-longa) calc(var(--i, 0) * 55ms + var(--atraso, 0ms));
+}
+.nova-titulo[data-visivel] .nova-palavra {
+  translate: 0 0;
+}
+/* Hero: entra por CSS puro, então o título aparece mesmo antes (ou sem) a hidratação. */
+.nova-entrada .nova-palavra {
+  animation: nova-subir 1.15s var(--nova-ease-longa) both;
+  animation-delay: calc(var(--i, 0) * 70ms + var(--atraso, 0ms));
+}
+.nova-surgir {
+  animation: nova-surgir 1s var(--nova-ease-longa) both;
+  animation-delay: var(--atraso, 0ms);
+}
+
+.nova-crescer {
+  transform-origin: left center;
+  animation: nova-crescer 1.6s var(--nova-ease-longa) both;
+  animation-delay: var(--atraso, 0ms);
+}
+
+.nova-linha {
+  scale: 0 1;
+  transform-origin: left center;
+  transition: scale 1.4s var(--nova-ease-longa) calc(var(--atraso, 0ms) + 150ms);
+}
+[data-visivel] .nova-linha {
+  scale: 1 1;
+}
+
+.nova-desenho {
+  stroke-dasharray: 1;
+  animation: nova-desenhar 3.2s var(--nova-ease-longa) both;
+  animation-delay: var(--atraso, 0ms);
+}
+
+.nova-ken-burns {
+  animation: nova-ken-burns 28s ease-in-out infinite alternate;
+}
+
+.nova-ken-burns-slide {
+  animation: nova-ken-burns-slide 7s ease-out both;
+}
+
+.nova-legenda-troca {
+  animation: nova-legenda-troca 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nova-progresso-slide {
+  animation: nova-progresso-slide linear both;
+}
+
+.nova-girar {
+  animation: nova-girar 22s linear infinite;
+}
+
+.nova-marquee-trilha {
+  animation: nova-marquee var(--duracao, 40s) linear infinite;
+}
+.nova-marquee:hover .nova-marquee-trilha,
+.nova-marquee:focus-within .nova-marquee-trilha {
+  animation-play-state: paused;
+}
+
+/* Recuo final calculado para o último cartão também conseguir parar alinhado ao início. */
+.nova-trilha {
+  --recuo: max(1.25rem, calc((100% - 80rem) / 2 + 1.25rem));
+  --cartao: 84vw;
+  padding-inline: var(--recuo) calc(100% - var(--cartao) - var(--recuo));
+  scroll-padding-inline-start: var(--recuo);
+}
+@media (min-width: 40rem) {
+  .nova-trilha {
+    --recuo: max(2rem, calc((100% - 80rem) / 2 + 2rem));
+    --cartao: 64vw;
+  }
+}
+@media (min-width: 64rem) {
+  .nova-trilha {
+    --cartao: min(54vw, 46rem);
+  }
+}
+
+.nova-pulso {
+  animation: nova-pulso 2.4s var(--nova-ease) infinite;
+}
+
+@keyframes nova-subir {
+  from {
+    translate: 0 110%;
+  }
+}
+@keyframes nova-surgir {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+@keyframes nova-crescer {
+  from {
+    scale: 0 1;
+  }
+}
+@keyframes nova-desenhar {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes nova-ken-burns {
+  from {
+    scale: 1.16;
+    translate: 1.5% 1%;
+  }
+  to {
+    scale: 1.04;
+    translate: -1.5% -1%;
+  }
+}
+@keyframes nova-ken-burns-slide {
+  from {
+    scale: 1.14;
+    translate: 1.5% 1%;
+  }
+  to {
+    scale: 1.02;
+    translate: 0 0;
+  }
+}
+@keyframes nova-legenda-troca {
+  from {
+    opacity: 0;
+    translate: 0 100%;
+  }
+}
+@keyframes nova-progresso-slide {
+  from {
+    scale: 0 1;
+  }
+}
+@keyframes nova-girar {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes nova-marquee {
+  to {
+    translate: -50% 0;
+  }
+}
+@keyframes nova-pulso {
+  from {
+    scale: 1;
+    opacity: 0.55;
+  }
+  to {
+    scale: 1.8;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nova *,
+  .nova *::before,
+  .nova *::after {
+    animation: none !important;
+  }
+  .nova-revelar,
+  .nova-titulo .nova-palavra,
+  .nova-linha {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    transition: none;
+  }
+  .nova-marquee {
+    overflow-x: auto !important;
+  }
+  .nova-marquee-copia {
+    display: none;
+  }
+}
+
+@media (scripting: none) {
+  .nova-revelar,
+  .nova-titulo .nova-palavra,
+  .nova-linha {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+}

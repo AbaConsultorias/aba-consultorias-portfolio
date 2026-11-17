@@ -1,0 +1,4 @@
+{
+  "regions": ["iad1"],
+  "crons": [{ "path": "/api/tarefas/limpar-orfaos", "schedule": "0 6 * * *" }]
+}

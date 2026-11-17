@@ -1,0 +1,25 @@
+.forn-lista { display: grid; gap: 1.25rem; margin-block: 1.5rem; list-style: none; padding: 0; }
+.forn-caixa { min-width: 0; padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+.forn-caixa h2, .forn-caixa h3 { font-size: 1.2rem; font-weight: 500; overflow-wrap: anywhere; }
+.forn-caixa h2 { margin-bottom: 1rem; }
+.forn-linha { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; }
+.forn-linha h2 { margin: 0; }
+.forn-ajuda { color: var(--muted-foreground); font-size: .875rem; line-height: 1.65; }
+.forn-form { margin-top: 1.25rem; }
+.forn-form fieldset { display: grid; gap: 1.25rem; min-width: 0; }
+.forn-form select, .forn-form textarea, .forn-filtros select { width: 100%; min-height: 2.75rem; padding: .65rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--background); }
+.forn-form button { justify-self: start; }
+.forn-mensagem { min-height: 1.5rem; margin-top: .75rem; font-size: .875rem; }
+.forn-link { display: inline-flex; gap: .5rem; align-items: center; min-height: 2.75rem; color: var(--primary); text-decoration: underline; text-underline-offset: .25rem; transition: opacity 200ms ease, background-color 200ms ease; }
+.forn-link:hover { opacity: .75; }
+.forn-aviso, .forn-observacao { margin-block: 1rem; padding: 1rem; background: var(--muted); border-radius: .5rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.forn-condicao { min-width: 14rem; max-width: 24rem; white-space: pre-wrap !important; overflow-wrap: anywhere; }
+.forn-paginacao { margin-block: 1.5rem; }
+.forn-filtros { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; margin-block: 1.5rem; }
+.forn-filtros label { display: grid; gap: .5rem; flex: 1 1 12rem; }
+.forn-caixa summary { cursor: pointer; min-height: 2.75rem; padding-block: .5rem; transition: color 200ms ease; }
+.forn-caixa summary:hover { color: var(--primary); }
+.forn-form select, .forn-form textarea, .forn-filtros select { transition: border-color 200ms ease, box-shadow 200ms ease; }
+.forn-form select:hover, .forn-form textarea:hover, .forn-filtros select:hover { border-color: var(--primary); }
+.forn-form select:focus-visible, .forn-form textarea:focus-visible, .forn-filtros select:focus-visible,
+.forn-link:focus-visible, .forn-caixa summary:focus-visible { outline: 2px solid var(--ring, var(--primary)); outline-offset: 2px; }

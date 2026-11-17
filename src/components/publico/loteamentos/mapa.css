@@ -1,0 +1,115 @@
+.mapa-lotes svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  overflow: visible;
+}
+
+.mapa-lotes [data-status] {
+  cursor: pointer;
+  outline: none;
+  stroke: #ffffff;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill 0.35s var(--nova-ease, ease-out),
+    opacity 0.35s var(--nova-ease, ease-out),
+    stroke 0.35s var(--nova-ease, ease-out),
+    stroke-width 0.35s var(--nova-ease, ease-out);
+}
+.mapa-lotes [data-status="disponivel"],
+.mapa-lotes [data-status="disponivel"] * {
+  fill: #2f9e63 !important;
+}
+.mapa-lotes [data-status="vendido"],
+.mapa-lotes [data-status="vendido"] * {
+  fill: #d4574f !important;
+}
+.mapa-lotes [data-status="area_tecnica"],
+.mapa-lotes [data-status="area_tecnica"] * {
+  fill: #9aa5ae !important;
+}
+.mapa-lotes [data-status="vendido"],
+.mapa-lotes [data-status="area_tecnica"] {
+  cursor: default;
+}
+
+.mapa-lotes [data-status="disponivel"]:hover,
+.mapa-lotes [data-status="disponivel"]:focus-visible {
+  stroke: #1c2832;
+  stroke-width: 2;
+}
+.mapa-lotes [data-status]:hover,
+.mapa-lotes [data-status]:focus-visible {
+  opacity: 0.88;
+}
+.mapa-lotes [data-status][data-selecionado] {
+  stroke: #1c2832;
+  stroke-width: 3;
+  opacity: 1;
+}
+.mapa-lotes [data-status="disponivel"]:focus-visible {
+  stroke: #2b7090;
+  stroke-width: 3;
+}
+
+.mapa-cartao {
+  animation: mapa-cartao 0.35s var(--nova-ease-longa, ease-out) both;
+}
+@keyframes mapa-cartao {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+}
+
+.galeria-dialogo {
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+}
+.galeria-dialogo::backdrop {
+  background: rgb(10 16 22 / 0.92);
+  backdrop-filter: blur(6px);
+  animation: galeria-fundo 0.35s ease-out both;
+}
+.galeria-dialogo[open] .galeria-palco {
+  animation: galeria-entrar 0.45s var(--nova-ease-longa, ease-out) both;
+}
+.galeria-dialogo[data-fechando]::backdrop {
+  animation: galeria-fundo 0.25s ease-in reverse both;
+}
+.galeria-dialogo[data-fechando] .galeria-palco {
+  animation: galeria-entrar 0.25s ease-in reverse both;
+}
+@keyframes galeria-fundo {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes galeria-entrar {
+  from {
+    opacity: 0;
+    scale: 0.97;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapa-cartao,
+  .galeria-dialogo::backdrop,
+  .galeria-dialogo[open] .galeria-palco,
+  .galeria-dialogo[data-fechando]::backdrop,
+  .galeria-dialogo[data-fechando] .galeria-palco {
+    animation: none;
+  }
+  .mapa-lotes [data-status] {
+    transition: none;
+  }
+}

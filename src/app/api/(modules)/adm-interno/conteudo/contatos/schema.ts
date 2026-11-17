@@ -1,0 +1,10 @@
+import z from "zod";
+import {} from "@/components/admin/conteudo/validacao";
+import { identificadorSchema } from "@/components/admin/conteudo/validacao";
+export const camposSchema = z.object({ lido: z.boolean() });
+export const criarSchema = camposSchema;
+export const atualizarSchema = camposSchema.extend({ id: z.uuid("ID inválido.") });
+export const excluirSchema = identificadorSchema;
+export const consultaSchema = z.object({ lido: z.enum(["todos", "lidos", "nao-lidos"]).default("todos"), pagina: z.coerce.number().int().min(1).max(100000).default(1) });
+export type CriarInput = z.infer<typeof criarSchema>;
+export type AtualizarInput = z.infer<typeof atualizarSchema>;

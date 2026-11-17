@@ -1,0 +1,13 @@
+{
+  "name": "conector-aba",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Conector ABA 2.0: envia os PDFs do servidor da ABA para o site",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"testes/*.test.mjs\""
+  }
+}

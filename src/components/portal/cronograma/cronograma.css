@@ -1,0 +1,115 @@
+/* Mesmas cores de situação do financeiro (contraste AA no texto; marca >= 3:1). Declaradas aqui para a aba não depender do CSS de outra tela. */
+:root {
+  --cron-quitada-fg: #17653a; --cron-quitada-bg: #e4f4ea; --cron-quitada-marca: #2e8b57;
+  --cron-aberta-fg: #235f7d; --cron-aberta-bg: #e6f0f5; --cron-aberta-marca: #2b7090;
+  --cron-vencida-fg: #a8200f; --cron-vencida-bg: #fde8e5; --cron-vencida-marca: #d92d20;
+  --cron-parcial-fg: #0b6767; --cron-parcial-bg: #dff2f2; --cron-parcial-marca: #14868a;
+}
+:root.dark, .dark {
+  --cron-quitada-fg: #7fdca4; --cron-quitada-bg: #173a29; --cron-quitada-marca: #3fae70;
+  --cron-aberta-fg: #8cc7e3; --cron-aberta-bg: #1b3a4c; --cron-aberta-marca: #4a9cc4;
+  --cron-vencida-fg: #ffa49b; --cron-vencida-bg: #4d1f1b; --cron-vencida-marca: #f97066;
+  --cron-parcial-fg: #6fd6d6; --cron-parcial-bg: #12403f; --cron-parcial-marca: #2fb5b5;
+}
+.cron [data-estado="quitada"] { --cron-fg: var(--cron-quitada-fg); --cron-bg: var(--cron-quitada-bg); --cron-marca: var(--cron-quitada-marca); }
+.cron [data-estado="aberta"] { --cron-fg: var(--cron-aberta-fg); --cron-bg: var(--cron-aberta-bg); --cron-marca: var(--cron-aberta-marca); }
+.cron [data-estado="vencida"] { --cron-fg: var(--cron-vencida-fg); --cron-bg: var(--cron-vencida-bg); --cron-marca: var(--cron-vencida-marca); }
+.cron [data-estado="parcial"] { --cron-fg: var(--cron-parcial-fg); --cron-bg: var(--cron-parcial-bg); --cron-marca: var(--cron-parcial-marca); }
+
+.cron { min-width: 0; }
+.cron-filtro { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.75rem 1rem; margin-bottom: 1.25rem; }
+.cron-filtro label { display: flex; flex-direction: column; gap: 0.25rem; color: var(--muted-foreground); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.cron-filtro input[type="month"] { min-height: 2.75rem; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 0.75rem; background: var(--card); color: var(--foreground); font: inherit; font-size: 0.875rem; letter-spacing: normal; text-transform: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.cron-filtro input[type="month"]:hover { border-color: var(--nova-acento); }
+.cron-botao { min-height: 2.75rem; padding: 0.5rem 1.25rem; border-radius: 0.75rem; background: var(--primary); color: var(--primary-foreground); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: opacity 0.2s ease, transform 0.2s ease; }
+.cron-botao:hover { opacity: 0.88; }
+.cron-botao:active { transform: translateY(1px); }
+.cron-limpar { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.5rem 0.75rem; border-radius: 0.75rem; font-size: 0.875rem; text-decoration: underline; text-underline-offset: 0.2em; transition: background-color 0.2s ease; }
+.cron-limpar:hover { background: var(--accent); }
+.cron-filtro :is(input, button, a):focus-visible, .cron-rolagem:focus-visible { outline: 2px solid var(--nova-acento); outline-offset: 3px; }
+
+.cron-legenda { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+.cron-legenda-titulo { color: var(--muted-foreground); font-size: 0.75rem; margin-right: 0.25rem; }
+.cron-selo { display: inline-flex; align-items: center; gap: 0.3125rem; border: 1px solid var(--cron-marca); border-radius: 999px; padding: 0.125rem 0.625rem 0.125rem 0.5rem; background: var(--cron-bg); color: var(--cron-fg); font-size: 0.75rem; font-weight: 500; line-height: 1.5; }
+.cron-selo svg { flex-shrink: 0; }
+.cron-aviso { margin-bottom: 1rem; padding: 0.875rem 1.125rem; border: 1px solid var(--nova-acento); border-radius: 1rem; background: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+.cron-nota { margin-top: 1rem; color: var(--muted-foreground); font-size: 0.8125rem; line-height: 1.6; }
+
+.cron-rolagem { position: relative; overflow-x: auto; max-width: 100%; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); overscroll-behavior-x: contain; }
+.cron-tabela { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+.cron-tabela th, .cron-tabela td { padding: 0.5rem 0.625rem; border-bottom: 1px solid var(--border); border-inline-end: 1px solid var(--border); text-align: right; vertical-align: top; white-space: nowrap; }
+.cron-tabela thead th { background: var(--muted); color: var(--muted-foreground); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+.cron-tabela tfoot :is(th, td) { border-bottom: 0; background: var(--muted); font-weight: 600; }
+.cron-tabela :is(th, td):last-child { border-inline-end: 0; }
+.cron-tabela .cron-item-cabecalho, .cron-tabela .cron-item { position: sticky; inset-inline-start: 0; z-index: 1; width: 11rem; min-width: 11rem; max-width: 11rem; text-align: left; white-space: normal; background: var(--card); box-shadow: 1px 0 0 var(--border); }
+.cron-tabela thead .cron-item-cabecalho, .cron-tabela tfoot .cron-item { background: var(--muted); }
+.cron-tabela .cron-item-cabecalho { z-index: 2; }
+.cron-item-nome { display: block; font-size: 0.875rem; font-weight: 500; overflow-wrap: anywhere; }
+.cron-item-detalhe { display: block; margin-top: 0.125rem; color: var(--muted-foreground); font-size: 0.75rem; font-weight: 400; letter-spacing: normal; text-transform: none; overflow-wrap: anywhere; }
+.cron-mes { min-width: 6.75rem; }
+/* O ano acompanha a rolagem: com muitos meses, o rótulo centralizado ficaria fora da tela. */
+.cron-tabela thead .cron-ano:not(.cron-total-cabecalho) { text-align: left; }
+.cron-ano-rotulo { position: sticky; inset-inline-start: calc(11rem + 0.625rem); }
+@media (max-width: 40rem) { .cron-ano-rotulo { inset-inline-start: calc(8.5rem + 0.625rem); } }
+.cron-celula { min-width: 6.75rem; transition: background-color 0.2s ease; }
+.cron-celula[data-estado] { background: var(--cron-bg); color: var(--cron-fg); box-shadow: inset 0 0.1875rem 0 var(--cron-marca); }
+.cron-celula[data-estado]:hover { filter: brightness(0.96); }
+.cron-vazia { color: var(--muted-foreground); text-align: center; }
+.cron-valor { display: block; font-weight: 600; }
+.cron-rotulo { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.6875rem; font-weight: 500; }
+.cron-rotulo svg { flex-shrink: 0; }
+.cron-pago { display: block; font-size: 0.6875rem; }
+.cron-soma span { display: block; }
+.cron-soma span:not(.cron-valor) { color: var(--muted-foreground); font-size: 0.75rem; font-weight: 500; }
+/* Totais em tom próprio (azul da marca), separados dos meses por uma linha mais forte. */
+.cron { --cron-total-bg: color-mix(in oklch, var(--primary) 9%, var(--card)); --cron-total-forte: color-mix(in oklch, var(--primary) 18%, var(--card)); }
+.cron-total { min-width: 6.75rem; background: var(--cron-total-bg); color: var(--foreground); font-weight: 500; }
+.cron-tabela thead .cron-total-cabecalho { background: var(--cron-total-forte); color: var(--foreground); }
+.cron-tabela .cron-total-primeira { border-inline-start: 2px solid var(--primary); }
+.cron-tabela tfoot .cron-linha-total :is(th, td) { background: var(--cron-total-forte); border-top: 2px solid var(--primary); color: var(--foreground); }
+.cron-tabela tfoot .cron-linha-total .cron-soma span:not(.cron-valor) { color: var(--foreground); opacity: 0.75; }
+.cron-tabela tbody tr:hover .cron-vazia { background: var(--muted); }
+.cron-tabela tbody tr:hover .cron-total { background: var(--cron-total-forte); }
+
+/* Célula clicável: abre o detalhe das parcelas (popover nativo, fica por cima da tabela). */
+.cron-celula[data-estado] { padding: 0; }
+.cron-celula-botao { display: block; width: 100%; padding: 0.5rem 0.625rem; text-align: right; color: inherit; font: inherit; cursor: pointer; }
+.cron-celula-botao:focus-visible { outline: 2px solid var(--cron-marca); outline-offset: -3px; }
+.cron-celula-botao:hover .cron-valor { text-decoration: underline; text-underline-offset: 0.2em; }
+.cron-detalhe { width: min(22rem, calc(100vw - 2rem)); max-height: min(80vh, 32rem); margin: auto; padding: 1rem 1.125rem 1.125rem; border: 1px solid var(--border); border-top: 4px solid var(--cron-marca); border-radius: 1rem; background: var(--card); color: var(--foreground); box-shadow: 0 18px 48px rgb(0 0 0 / 0.22); text-align: left; white-space: normal; overflow-y: auto; }
+.cron-detalhe::backdrop { background: rgb(15 23 30 / 0.35); }
+.cron-detalhe-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.75rem; }
+.cron-detalhe-item { font-size: 0.9375rem; font-weight: 600; overflow-wrap: anywhere; }
+.cron-detalhe-mes { margin-top: 0.125rem; color: var(--cron-fg); font-size: 0.8125rem; font-weight: 500; }
+.cron-detalhe-mes::first-letter { text-transform: uppercase; }
+.cron-detalhe-fechar { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; flex-shrink: 0; border-radius: 999px; color: var(--muted-foreground); cursor: pointer; }
+.cron-detalhe-fechar:hover { background: var(--muted); color: var(--foreground); }
+.cron-detalhe-lista { display: grid; gap: 0.625rem; margin: 0; padding: 0; list-style: none; }
+.cron-detalhe-lista li { padding: 0.75rem; border-radius: 0.75rem; background: var(--cron-bg); }
+.cron-detalhe-nome { margin-bottom: 0.375rem; color: var(--cron-fg); font-size: 0.8125rem; font-weight: 600; }
+.cron-detalhe-lista dl { display: grid; gap: 0.25rem; margin: 0; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+.cron-detalhe-lista dl > div { display: flex; justify-content: space-between; gap: 1rem; }
+.cron-detalhe-lista dt { color: var(--muted-foreground); }
+.cron-detalhe-lista dd { margin: 0; font-weight: 500; text-align: right; }
+.cron-tabela :is(.cron-total, .cron-vazia) { transition: background-color 0.2s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cron * { transition: none !important; }
+}
+@media (max-width: 40rem) {
+  .cron-tabela .cron-item-cabecalho, .cron-tabela .cron-item { width: 8.5rem; min-width: 8.5rem; max-width: 8.5rem; }
+  .cron-filtro label { flex: 1 1 8rem; }
+  .cron-filtro input[type="month"] { width: 100%; }
+}
+
+/* Detalhe aberto pelo mouse (BotaoCelula): flutua ao lado da célula, sem escurecer a tela. */
+.cron-detalhe[data-modo="flutuante"] { position: fixed; inset: auto; margin: 0; width: min(19rem, calc(100vw - 1.5rem)); padding: 0.75rem 0.875rem 0.875rem; border-radius: 0.875rem; box-shadow: 0 12px 32px rgb(0 0 0 / 0.18); animation: cron-surgir 0.15s ease-out; }
+.cron-detalhe[data-modo="flutuante"]::backdrop { background: transparent; }
+.cron-detalhe[data-modo="flutuante"] .cron-detalhe-fechar { display: none; }
+.cron-detalhe[data-modo="flutuante"] .cron-detalhe-topo { margin-bottom: 0.5rem; }
+.cron-detalhe[data-modo="flutuante"] .cron-detalhe-lista li { padding: 0.5rem 0.625rem; }
+@keyframes cron-surgir { from { opacity: 0; transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .cron-detalhe[data-modo="flutuante"] { animation: none; } }
+/* A célula inteira conta para o mouse e o toque, não só o texto do valor. */
+.cron-celula[data-estado] { position: relative; }
+.cron-celula-botao::after { content: ""; position: absolute; inset: 0; }
